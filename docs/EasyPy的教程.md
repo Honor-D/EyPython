@@ -40,6 +40,7 @@ EasyPy可以由电池或其他外部电源供电。
 让我们直接进入并在EasyPy上运行Python脚本。毕竟，这就是它的全部！
 ###2.1. 连接您的EasyPy 
 使用micro USB线将EasyPy连接到PC（Windows，Mac或Linux）。电缆只有一种连接方式，所以你不会错。
+
 ![](https://raw.githubusercontent.com/Honor-D/EasyPython/master/img/wps22.png) 
 
 当EasyPy连接到您的PC时，它将打开电源并进入启动过程（启动过程）。绿色LED应亮起半秒或更短时间，当它关闭时表示启动过程已完成。
