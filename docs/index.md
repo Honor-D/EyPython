@@ -1,6 +1,6 @@
 #欢迎来到Easy Python
 
-![](https://raw.githubusercontent.com/Honor-D/EasyPython/master/img/xinpian1.png)  ![](https://raw.githubusercontent.com/Honor-D/EasyPython/master/img/xinpian2.png)
+![](https://raw.githubusercontent.com/Honor-D/EasyPython/master/img/wps2.png)  ![](https://raw.githubusercontent.com/Honor-D/EasyPython/master/img/wps42.png)
 
 首先,恭喜你加入国家战略计划与《2019年教育信息化和网络安全工作要点》，现在你有了新的Easy-python学习板。你把它插上了。也许它出现在一个叫做Easy-python的磁盘驱动器上。
 从这一刻起，我们一起开始见证你人生的奇迹！
