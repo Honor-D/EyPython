@@ -1,90 +1,89 @@
 #EasyPy的教程
 本教程旨在帮助您开始使用EasyPy。您只需要一个EasyPy和一根micro-USB线将其连接到PC。如果这是您的第一次，建议按照以下顺序按照教程进行操作。
 
- 1. EasyPy board简介
- 2. 运行第一个脚本
- 3. 获取EasyPython REPL提示
- 4. 打开LED和基本的Python概念
- 5. 按键Switch，回调和中断
- 6. 加速度计
- 7. 安全模式和出厂重置
- 8. 使EasyPy充当USB鼠标
- 9. 定时器
- 10. 内联汇编程序
- 11. 电源控制
- 12. 声音侦测
- 13. 电子音乐
- 14. 光感测
+> * 1.ePy board简介
+> * 2.运行第一个脚本
+> * 3.获取EasyPython REPL提示
+> * 4.打开LED和基本的Python概念
+> * 5.按键Switch，回调和中断
+> * 6.加速度计
+> * 7.定时器
+> * 8.RTC
+> * 9.PWM
+> * 10.PIN
+> * 11.ADC
+> * 12.声音侦测
+> * 13.电子音乐
+> * 14.光感测
+> * 15.UART
+> * 16.I2C
+> * 17.SPI
+##4.1 ePy board简介
+为了充分利用你的ePy board，有一些基本的东西需要了解它是如何工作的。
 
-##1. EasyPy board简介
+ - 插拔USB电缆时要轻柔。虽然USB连接器通过电路板焊接并且相对较强，但如果它断开则可能很难固定。
+ - 静电会震动ePy board上的组件并将其破坏。如果您所在地区经历了大量静电（例如干燥和寒冷的气候），请特别注意不要让ePy board受到冲击。如果你的ePy board是一个黑色塑料盒，那么这个盒子是存放和携带EasyPy的最佳方式，因为它是一个防静电盒子（它由导电塑料制成，里面有导电泡沫）。
+ 
+只要你照顾硬件，你应该没问题。破解ePy board上的软件几乎是不可能的，所以随意编写代码，尽可能多地编写代码。如果文件系统损坏，您可能需要重新刷新EasyPy软件，但这可以通过USB完成。
+###4.1.1 ePy board的布局
 
-为了充分利用你的EasyPy，有一些基本的东西需要了解它是如何工作的。
-###1.1. 关爱您的EasyPy 
-因为EasyPy没有外壳，所以需要一点小心：
-> * 插拔USB电缆时要轻柔。虽然USB连接器通过电路板焊接并且相对较强，但如果它断开则可能很难固定。
+    Micro USB连接器位于上方中间的位置，板子的右下方有4个LED。颜色为：底部为黄色，顶部为红色，绿色和蓝色。有5个按键：再USB座的右边是复位按键，上面左右边是A, B用户按键。背面也有两个按键C, D.
 
-> * 静电会震动EasyPy上的组件并将其破坏。如果您所在地区经历了大量静电（例如干燥和寒冷的气候），请特别注意不要让EasyPy受到冲击。如果你的EasyPy是一个黑色塑料盒，那么这个盒子是存放和携带EasyPy的最佳方式，因为它是一个防静电盒子（它由导电塑料制成，里面有导电泡沫）。
-> * 只要你照顾硬件，你应该没问题。破解EasyPy上的软件几乎是不可能的，所以随意编写代码，尽可能多地编写代码。如果文件系统损坏，请参阅下面有关如何重置它的信息。在最坏的情况下，您可能需要重新刷新EasyPython软件，但这可以通过USB完成。
+###4.1.2 插入和开机
 
-###1.2. EasyPy的布局
-Micro USB连接器位于上方中间的位置，板子的右下方有4个LED。颜色为：底部为红色，顶部为绿色，橙色和蓝色。有2个开关：右边一个是复位开关，左边是用户开关。
-###1.3. 插入和开机
-EasyPy可以通过USB供电。通过micro USB线将其连接到PC。电缆只有一种方式适合。连接后，电路板上的绿色LED应快速闪烁。
-###1.4. 通过外部电源供电
-EasyPy可以由电池或其他外部电源供电。
+    ePy board可以通过USB供电。通过micro USB线将其连接到PC。电缆只有一种方式适合。连接后，电路板上的绿色LED应快速闪烁。完成开机, 绿灯将常亮
 
+###4.1.3 通过外部电源供电
+
+    ePy board可以由电池或其他外部电源供电。
+    
 **务必将电源正极连接到VIN，接地连接到GND。EasyPy上没有极性保护，因此在将任何东西连接到VIN时必须小心。**
 
-**输入电压必须介于3.6V和10V之间**。
-##2. 运行你的第一个脚本
-让我们直接进入并在EasyPy上运行Python脚本。毕竟，这就是它的全部！
-###2.1. 连接您的EasyPy 
-使用micro USB线将EasyPy连接到PC（Windows，Mac或Linux）。电缆只有一种连接方式，所以你不会错。
+**输入电压必须介于3.6V和8.4V之间**
 
-![](https://raw.githubusercontent.com/Honor-D/EasyPython/master/img/wps22.png) 
+##4.2 运行你的第一个脚本
+让我们直接进入并在ePy board上运行Python脚本。毕竟，这就是它的全部！
+###4.2.1 连接您的ePy board 
+使用micro USB线将ePy board连接到PC。电缆只有一种连接方式，所以你不会错。
 
-当EasyPy连接到您的PC时，它将打开电源并进入启动过程（启动过程）。绿色LED应亮起半秒或更短时间，当它关闭时表示启动过程已完成。
-###2.2. 打开EasyPy USB驱动器
+![](https://raw.githubusercontent.com/Honor-D/EasyPython/master/img/wps12153.png) 
+
+当ePy board连接到您的PC时，它将打开电源并进入启动过程（启动过程）。绿色LED应亮起半秒或更短时间，当它常亮时表示启动过程已完成。这时候会看到PC会增加一个磁盘槽. 可以找到boot.py和main.py以及一些说明文檔。
+###4.2.2 打开EasyPy USB驱动器
 您的PC现在应该识别EasyPy。这取决于您拥有的PC类型，接下来会发生什么：
 
  - Windows：您的EasyPy将显示为可移动USB闪存驱动器。Windows可能会自动弹出一个窗口，或者您可能需要使用资源管理器去那里。
- 
-   Windows还会看到EasyPy有一个串行设备，它会尝试自动配置这个设备。如果是，请取消该过程。我们将在下一个教程中使用串行设备。
+Windows还会看到EasyPy有一个串行设备，它会尝试自动配置这个设备。如果是，请取消该过程。我们将在下一个教程中使用串行设备。
 
  - Mac：您的EasyPy将作为可移动光盘出现在桌面上。它可能会被称为“NONAME”。单击它打开EasyPy活页夹。
 
- - Linux：您的EasyPy将显示为可移动媒体。在Ubuntu上，它将自动挂载并弹出一个带有EasyPy活页夹的窗口。在其他Linux发行版上，EasyPy可能会自动挂载，或者您可能需要手动执行。在终端命令行中，键入`lsblk` 以查看已连接驱动器的列表，然后（替换 为相应的设备）。您可能需要root才能执行此操作。`mount /dev/sdb1sdb1`
-   好的，所以你现在应该将EasyPy连接为USB闪存驱动器，并且窗口（或命令行）应该显示EasyPy驱动器上的文件。
+ - Linux：您的EasyPy将显示为可移动媒体。在Ubuntu上，它将自动挂载并弹出一个带有EasyPy活页夹的窗口。在其他Linux发行版上，EasyPy可能会自动挂载，或者您可能需要手动执行。在终端命令行中，键入lsblk 以查看已连接驱动器的列表，然后（替换为相应的设备）。您可能需要root才能执行此操作。mount /dev/sdb1sdb1
+好的，所以你现在应该将EasyPy连接为USB闪存驱动器，并且窗口（或命令行）应该显示EasyPy驱动器上的文件。
+您正在查看的驱动器称为/flashEasyPy，应包含以下2个文件：
 
-您正在查看的驱动器称为`/flash`EasyPy，应包含以下4个文件：
-
- - boot.py - 当EasyPy启动时执行此脚本。它设定 EasyPy的各种配置选项。
-
- - main.py - 这是包含Python程序的主脚本。它执行后`boot.py`。
-
- - README.txt - 这包含一些关于获取的基本信息从EasyPy开始。
-
- - pybcdc.inf -这是一个配置串行USB的Windows驱动程序文件设备。在下一个教程中有关于此的更多信息
- 
-
-###2.3. 编辑`main.py`
-现在我们将编写Python程序，因此main.py 在文本编辑器中打开文件。在Windows上，您可以使用记事本或MU编辑器。在Mac和Linux上，使用您喜欢的文本编辑器。打开文件，您会看到它包含1行：
+ - boot.py - 当EasyPy启动时执行此脚本。它设定
+EasyPy的各种配置选项。
+ - main.py - 这是包含Python程序的主脚本。
+它执行后boot.py。
+###4.2.3 编辑Main.py
+现在我们将编写Easy Python程序，因此main.py 在Windows上的MU编辑器中打开文件。在Mac和Linux上，使用您喜欢的文本编辑器。打开文件，您会看到它包含1行：
 
     # main.py -- put your code here!   ;把你的代码放在这里！
 
 该行以＃字符开头，表示它是注释。这些行不会做任何事情，你可以在那里写下关于你的程序的注释。
 
-让我们在这个`main.py`文件中加2行，使它看起来像这样：
+让我们在这个main.py文件中加2行，使它看起来像这样：
 
     # main.py -- put your code here! ; 把你的代码放在这里！
-    import pyb
-    pyb.LED(4).on()
 
-我们写的第一行说我们想要使用该`pyb`模块。该模块包含控制EasyPy功能的所有函数和类。
+    from machine import LED
+    LED(3).on()
 
-我们写的第二行打开了蓝色LED：它首先`LED` 从`pyb`模块中获取类，创建LED编号4（蓝色LED），然后将其打开。
-###2.4. 重置EasyPy 
-要运行此小脚本，您需要先保存并关闭该`main.py`文件，然后弹出（或卸除）EasyPy USB驱动器。这样做就像普通的USB闪存驱动器一样。
+我们写的第一行说我们想要使用该machine (ePy)模块。该模块包含控制EasyPy功能的所有函数和类型。
+
+我们写的第二行打开了蓝色LED：它首先LED 从ePy模块中获取类型，创建LED编号3（蓝色LED），然后将其打开。
+###4.2.4 重置EasyPy 
+要运行此小脚本，您需要先保存并关闭该main.py文件，然后弹出（或卸除）EasyPy USB驱动器。这样做就像普通的USB闪存驱动器一样。
 
 当安全地弹出/卸除驱动器时，您可以进入有趣的部分：按下EasyPy上的RST开关以重置并运行您的脚本。RST开关是板上USB连接器旁边的小黑色按钮。
 
@@ -92,73 +91,1009 @@ EasyPy可以由电池或其他外部电源供电。
 
 恭喜！您已经编写并运行了第一个EasyPython程序！
 
-##3. 获取EasyPython REPL提示
+##4.3 获取EasyPython REPL提示
 REPL代表Read Evaluate Print Loop，是您可以在EasyPy上访问的交互式EasyPython提示的名称。到目前为止，使用REPL是测试代码和运行命令的最简单方法。除了编写脚本外，您还可以使用REPL `main.py`。
 
 要使用REPL，您必须连接到EasyPy上的串行USB设备。如何执行此操作取决于您的操作系统。
 
-###3.1. 窗口
-您需要安装EasyPy驱动程序才能使用串行USB设备。驱动程序位于EasyPy的USB闪存驱动器上，并被调用`pybcdc.inf`。
-
-要安装此驱动程序，您需要转到计算器的设备管理器，在设备列表中找到EasyPy（它旁边应该有一个警告标志，因为它还没有工作），右键单击EasyPy设备，选择Properties，然后安装驱动程序 然后，您需要选择手动查找驱动程序的选项（不要使用Windows自动更新），导航到EasyPy的USB驱动器，然后选择它。然后应该安装。安装完成后，返回设备管理器以查找已安装的EasyPy，并查看它是哪个COM端口（例如COM4）。更全面的说明可以 在Windows上的EasyPy指南（PDF）中找到。如果您在安装驱动程序时遇到问题，请参阅本指南。
-
-您现在需要运行终端程序。如果安装了HyperTerminal，可以使用HyperTerminal，也可以下载免费程序PuTTY： putty.exe。使用串行程序，您必须连接到上一步中找到的COM端口。使用PuTTY，单击左侧面板中的“Session”，然后单击右侧的“Serial”单选按钮，然后在“Serial Line”框中输入COM端口（例如COM4）。最后，单击“打开”按钮。
-
-###3.2. Mac 
-打开终端并运行：
-
-    screen /dev/tty.usbmodem*
-
-完成后想要退出屏幕时，键入`CTRL-A CTRL- \`。
-###3.3. Linux的
-打开终端并运行：
-
-    screen /dev/ttyACM0
-
-您也可以尝试`picocom`或`minicom`代替屏幕。您可能必须使用`/dev/ttyACM1`或更高的数字`ttyACM`。而且，您可能需要为自己提供访问此设备的正确权限（例如，组`uucp`或`dialout`，或使用`sudo`）。
-
-###3.4. 使用REPL提示
-
+###4.3.1使用REPL提示
 现在让我们尝试直接在EasyPy上运行一些EasyPython代码。
 
-打开串行程序（PuTTY，screen，picocom等），您可能会看到一个带有闪烁光目标空白屏幕。按Enter键，您将看到一个EasyPython提示符，即>>>。让我们确保它正在使用强制性测试：
+打开MU编辑器并找到写有REPL的图标, 按下此图标后, 您会看到MU编辑器的下面窗口中出现Easy Python and ePy board的相关版本信息。按Enter键，您将看到一个EasyPython提示符，即>>>。让我们确保它正在使用强制性测试：
 
     >>> print （“hello EasyPy！” ）
-
     hello EasyPy！
 
+在上面，您不应该输入>>>字符。它们表示您应该在提示符后面键入文本。最后，输入文本并按Enter键后，屏幕上的输出应如上所示。print("hello EasyPy!")
 
-在上面，您不应该输入`>>>`字符。它们表示您应该在提示符后面键入文本。最后，输入文本并按Enter键后，屏幕上的输出应如上所示。`print("hello EasyPy!")`
-
-如果您已经了解了一些python，现在可以在这里尝试一些基本命令。
-
-如果其中任何一个不起作用，您可以尝试硬重置或软重置; 见下文。
+如果您已经了解了一些python，现在可以在这里尝试一些基本命令。EasyPy由于空间原因, 没有浮点支持, 也没有数学模块。这意味着浮点数不能在代码中的任何位置使用, 并且必须使用 "//" 而不是 "/" 执行所有分区。如果其中任何一个不起作用，您可以尝试硬重置或软重置; 见下文。
 
 继续尝试输入其他一些命令。例如：
 
-    >>> pyb.LED(1).on()
-    >>> pyb.LED(2).on()
+    >>> LED(1).on()
+    >>> LED(2).on()
+    >>> r=4//2  #运算正常
+    >>> r=4/2  #不正常运算
     >>> 1 + 2
     3
-    >>> 1 / 2
-    0.5
+    >>> 2 * 4
+    8
     >>> 20 * 'py'
     'pypypypypypypypypypypypypypypypypypypypy'
 
-###3.5. 重置板
-
+###4.3.2重置板
 如果出现问题，您可以通过两种方式重置电路板。第一种是在EasyPython提示符下按CTRL-D，它会执行软复位。你会看到类似的消息
 
     >>>
-    MPY: sync file systems				; 同步文件系统
-    MPY: soft reboot					; 软重启
-    Easy Python v1.0 on 2019-05-03; ePyBv1.0 with ePy200	; 带有ePy200的EasyPy输入
+    EASYPY: soft reboot					; 软重启
+    MicroPython mp_v_1.0000.0001-6-gfe121ad-dirty on 2019-05-14; DEFAULT EASYPY v1.00.00
     Type "help()" for more information.			; 以获取更多信息。
     >>>
 
-如果不起作用，您可以通过按下RST开关（最靠近电路板上的微型USB插座的黑色小按钮）执行硬重置（再次开启和关闭）。这将结束您的会话，断开您用于连接到EasyPy的任何程序（PuTTY，屏幕等）。
+如果不起作用，您可以通过按下RST开关（最靠近电路板上的微型USB插座的黑色小按钮）执行硬重置（再次开启和关闭）。这将结束您的会话，断开您用于连接到EasyPy的任何程序。
 
 如果要进行硬重置，建议先关闭串口程序并弹出/卸除EasyPy驱动器。
+##4.4 打开LED和基本的Python概念
+在EasyPy上最简单的方法是打开连接到电路板的LED。连接电路板，并按照教程1中的说明登录。我们将从解释器中的转动和LED开始，键入以下内容
+
+    >>> from machine import LED
+    >>> myled = LED(1)
+    >>> myled.on()		;开
+    >>> myled.off()		;关
+
+这些命令可以打开和关闭LED。
+
+这一切都很好，但我们希望这个过程是自动化的。在您喜欢的MU编辑器中打开EasyPy上的文件MAIN.py。将以下行写入或粘贴到文件中。如果您是python的新手，那么请确保缩进正确，因为这很重要！
+
+    from machine import Timer
+    from machine import LED
+    import utime
+    
+    led = LED(1)
+    while True:		;当真的
+        led.toggle()
+        utime.sleep_ms (1000)	;延迟1000ms
+
+要运行脚本，请执行”Flash”图标。然后EasyPy将下载Main.py并启动，您应该看到红灯持续闪烁。成功，是你建立邪恶机器人军队的第一步！当您对烦人的闪光灯感到厌倦时，请按下终端上的CTRL-C以停止运行。
+
+那么这段代码有什么用呢？首先，我们需要一些术语。类别on是一种面向对象的语言，几乎python中的所有东西都是一个Class (类别)，当你创建一个类别的实例时，你会得到一个对象。类别具有与之关联的方法。方法（也称为成员函数）用于与对象交互或控制对象。
+
+第一行代码创建了一个LED对象，然后我们称之为led对象。当我们创建对象时，它需要一个参数，该参数必须在0到3之间，对应于电路板上的4个LED。ePy LED类有三个我们将使用的重要成员函数：on（），off（）和toggle（）。我们使用的另一个函数是utime.sleep_ms（），这只是等待一个给定的时间，以毫秒为单位。一旦我们创建了LED对象，声明为True：创建一个无限循环，在打开和关闭之间切换LED并等待1秒。4个LED其分别的参数编号为红色LED(1), 绿色LED(2), 蓝色LED(3), 橙色LED(4)。
+
+**练习：尝试更改切换LED和打开不同LED之间的时间。**
+
+**练习：直接连接到EasyPy，创建一个ePy.LED对象并使用on（）方法将其打开**。
+
+###4.4.1 闪动您EasyPy 
+到目前为止，我们只使用了一个LED，但是EasyPy有4个可用。让我们首先为每个LED创建一个对象，以便我们可以控制每个LED。我们通过创建具有列表理解的LEDS列表来实现这一点。
+
+    leds = [LED(i) for i in range(1,5)]
+
+如果使用不是1,2,3,4的数字调用LED（），您将收到错误消息。接下来，我们将设置一个无限循环，循环通过每个LED打开和关闭它们。
+
+    from machine import Timer
+    from machine import LED
+    import utimer
+    n = 0
+    while True:
+      n = (n + 1) % 4
+      leds[n].toggle()
+      utime.sleep_ms(750)	延迟750毫秒
+
+这里，n跟踪当前LED，每次循环执行时我们循环到下一个n（％符号是模数运算符，保持n在0和3之间。）然后我们访问第n个LED并切换它。如果你运行它，你应该看到每个LED都打开然后所有LED按顺序再次关闭。
+
+您可能会发现的一个问题是，如果您停止脚本然后再次启动它，那就是LED从上一次运行中停留，破坏了我们精心编排的迪斯科舞厅。我们可以通过在初始化脚本然后使用try / finally块关闭所有LED来解决这个问题。当您按CTRL-C时，EasyPython会生成VCPInterrupt异常。异常通常意味着出现了问题，您可以使用try：命令来“捕获”异常。在这种情况下，只是用户中断脚本，因此我们不需要捕获错误，只是告诉EasyPython退出时要做什么。finally块执行此操作，我们使用它来确保所有LED都关闭。完整的代码是：
+
+    from machine import Timer
+    from machine import LED
+    import utime
+    
+    leds = [LED(i) for i in range(1,5)]
+    for l in leds:
+        l.off()
+    
+    n = 0
+    try:
+       while True:
+          n = (n + 1) % 4
+          leds[n].toggle()
+          utime.sleep_ms(750)
+    finally:
+        for l in leds:
+            l.off()
+
+##4.5 按键Key和中断
+EasyPy有5个小开关，标有A, B, C, D和RST。RST开关是一个硬复位开关，如果按下它，它会从头开始重新启动EasyPy，相当于关闭电源然后再打开电源。
+
+A, B, C, D开关用于一般用途，并通过按键Key对象进行控制。4个按键其分别的参数编号为按键A-KEY(0), 按键B-KEY(1), 按键C-KEY(2), 按键D-KEY(3)。 可以再REPL执行下面对象：
+
+    >>> sw = KEY(0)
+
+请记住，如果您收到名称不存在的错误，则可能需要键入内容。from machine import KEY
+使用key对象，您可以获得其状态：
+
+    >>> sw.value()
+    1
+
+1如果是未按住按键A或按住按键A，将打印0。尝试在运行上述命令时按住Key按键A。
+通过“调用”开关对象，还有一个简写符号来获取开关状态：
+
+    >>> sw.value()
+    0
+
+###4.5.1 中断
+该开关是一个非常简单的对象，但它确实有一个高级功能：该irq()功能。回调函数设置在按下开关时运行的东西，并使用中断。irq()的指令语法如下
+
+> irq(trigger, handler)
+
+trigger—表示按键触发的形式有
+
+a.PIN.IRQ_BOTH : 设置按键引脚上升沿和下降沿中断触发.
+b.PIN.IRQ_FALLING : 设置按键下降沿中断触发.
+c.PIN.IRQ_RISING : 设置按键引脚上升沿中断触发.
+d.PIN.IRQ_LOW_LEVEL : 设置按键引脚低电平中断触发.
+e.PIN.IRQ_HIGH_LEVEL : 设置按键引脚高电平中断触发.
+
+handler—可以创建一个回调函数，此中断处理程序获取您创建的函数并执行它
+
+一个按键中断产生将发生以下情况：
+
+1.按下开关时，引脚发生变化（trigger），微控制器记录此变化。
+2.微控制器完成当前机器指令的执行，停止执行并保存其当前状态（将寄存器推入堆栈）。这具有暂停任何代码的效果，例如您正在运行的Python脚本。
+3.微控制器开始执行与开关外部触发相关的特殊中断处理程序。此中断处理程序获取您注册的回调函数(handler)并执行它。
+4.执行回调函数直到完成，将控制权返回给开关中断处理程序。
+5.开关中断处理程序返回，并通知微控制器已经处理了中断。
+6.微控制器恢复在步骤2中保存的状态。
+7.继续执行一开始运行的代码。除了暂停，此代码不会注意到它被中断。
+
+当多个中断同时发生时，上述事件序列会变得复杂一些。在这种情况下，具有最高优先级的中断首先进行，然后按优先级顺序进行其他中断。开关中断设置为最低优先级。
+
+###4.5.2 按键范例
+
+    from machine import KEY
+    from machine import PIN
+    
+    p=PIN('P12')   #脚位为P4.4
+    p.mode(PIN.OUT)
+    p.value(0)
+    def toggle(t):
+        if p.value() == 0:
+        p.value(1)
+       else :
+        p.value(0)
+    k=KEY(1)
+    k.value()
+    k.irq(trigger=PIN.IRQ_BOTH, handler=toggle)
+
+##4.6 点亮RGB LED
+ePy board有5颗RGB LED可以来做控制, 导入EasyPython模块后，会为易控创建一个对象rgb, 控制板载的RGB只需对rgb对象操作。
+
+可以设置每个像素点颜色，num 为板载RGB灯的个数，第一个灯为1。 r、g、b 为颜色亮度值，范围值为0~255, 其控制语法如下
+
+> rgb_writer(num,r, g, b)
+
+num—设定RGB LED参数编号1-5
+r—设定红色亮度0-255
+g—设定绿色亮度0-255
+b—设定蓝色亮度0-255
+
+    from machine import LED
+    
+    rgb_led=LED(LED.RGB)
+    rgb_led.rgb_write(1,255,0,0)  # 设置RGB1为红色，全亮度
+    rgb_led.rgb_write(2,0,128,0)  # 设定RGB2为绿色，半亮度
+    rgb_led.rgb_write(3,0,0,64)   # 设置RGB2为蓝色，四分之一亮度
+
+###4.6.1 多彩LED
+点亮ePy board上5颗RGB LED来做七彩灯变化
+
+    from machine import LED
+    
+    l = LED(LED.RGB)
+    print("show render")
+    for i in range(0, 256, 1):
+        for j in range(1, 6, 1):
+            l.rgb_write(j, i, 0, 0)  	##Render red
+    for i in range(0, 256, 1):
+        for j in range(1, 6, 1):
+            l.rgb_write(j, 255, i, 0)  	##Render green
+    for i in range(0, 256, 1):
+        for j in range(1, 6, 1):
+            l.rgb_write(j, 255, 255, i)  ##Render blue
+    times = 0
+    while times < 10:  		##White LED breath 10 times
+        for i in range(255, 1, -1):
+            for j in range(1, 6, 1):
+                l.rgb_write(j, i, i, i)
+        for i in range(0, 256, 1):
+            for j in range(1, 6, 1):
+                l.rgb_write(j, i, i, i)
+        times = times + 1
+    for i in range(255, 1, -1):  	##Close LEDs slowly
+        for j in range(1, 6, 1):
+            l.rgb_write(j, i, i, i)
+    l.off()
+
+如果需要使用外部彩带，后续将创建一个新的对象来控制彩带上的LED。
+##4.7 音乐
+易控板板载无源蜂鸣器，其声音主要是通过高低不同的脉冲信号来控制而产生。声音频率可控，频率不同，发出的音调就不一样，从而可以发出不同的声音，还可以做出“多来米发索拉西”的效果。
+###4.7.1 自编乐谱
+我们可以通过设置音调来自编乐谱。
+
+    from machine import Music
+    
+    music=Music()
+    tune = [‘C4’,‘D4’,‘E4’,‘C4’,‘C4’,‘D4’,‘E4’,‘C4’,‘E4’,‘F4’,‘G4’,‘E4’,‘F4’,‘G4’]
+    music.play('C#3:4', wait = 0, loop = 0)
+    music.play(tune)
+
+每个音符都有一个名字（比如C＃或F），一个八度和一个持续时间。八度用数字表示〜0表示最低八度，4表示中央C，8表示您需要的高度。持续时间也表示为数字。 持续时间的值越高，持续时间越长。例如，持续时间4将持续两倍于持续时间2（依此类推）。
+
+每个音符都表示为一串字符，如下所示：
+
+> NOTE[octave][:duration]
+
+octave—表示八度音阶, 其数值范围为0到8
+duration—表示节拍, 其数值范围为1~99
+
+例如: C1:4  1指的是八度音阶1中的音符“C”，持续4个节拍时间。
+预设初始值为八度音阶4.
+R:4 使用音符名称R，则将其视为休息（静音）。
+ #:上升音
+ b:下降音
+
+> play(music, wait, loop)
+
+music—可以是一个音阶或一首歌
+wait—等待直到这首歌播放完成, 预设初始值是”0”
+loop—保持最后一个音符播放, 默认初始值是”0”
+
+> stop( )
+
+停止音乐播放
+
+> deinit( )
+
+释放音乐函数
+
+###4.7.2. 频率
+您还可以通过频率设置来制作一些非音符的音调。 例如，创建警笛效果：
+
+    from machine import music
+    
+    music=Music()
+    while True:
+        for freq in range(880, 1760, 16):
+            music.pitch(freq, 20,0)
+        for freq in range(1760, 880, -16):
+            music.pitch(freq,20,0)
+
+在这个实例中是如何使用 pitch 方法，它需要一个频率。 其中range函数用于生成数值范围。这些数字用于定义音调的高低。 range函数有三个参数，分别是起始值，结束值和步长。因此，range的第一次使用是“以16的步长创建880到1760之间的数字范围”； 第二个次是“以-16”的步长创建1760到880之间的一系列值，持续频率为20毫秒。因此获得像警报器一样在频率上升和下降的频率范围而制作出警笛效果。
+
+> pitch(frequency, duration, wait)
+
+frequency—频率值, 用于定义音调的高低
+duration—持续播放音调频率的时间, 以毫秒(ms)为计算单位
+wait—等待直到这音调频率播放完成
+###4.7.3 节拍设置
+您还可以通过节拍来制作一首歌曲演奏的快慢效果。
+
+    from machine import Music
+    
+    music=Music()
+    musci.tempo(ticks=200, bpm=8)
+    music.tempo()
+
+> tempo(ticks, bpm)
+
+ticks—设定节拍tick的数值, 默认初始值是”4”
+bpm—设定bpm的数值, 其表示每分钟多少拍, 可以表现节奏的快慢
+
+##4.8 ADC 模拟到数字转换
+易控板提供6路ADC输入来检测仿真信号, 其信号信道编号为0~5, ADC的采样数据为10bit即最大值为十进制1024. ADC 引脚输入范围为 0-3.3 v (为 3.3 v, 是其能够承受的绝对最大值)。
+
+    from machine import ADC
+    adc = ADC(0)		# 创建ADC物件
+    adc.init(1)             	# 启动ADC
+    adc.channel(0)  		# 创建ADC引脚
+    val = adc.read()              # 读取ADC数据
+
+> ADC(adc_channel)
+
+创建与给定引脚关联的 ADC 物件。这样, 您就可以读取该引脚上的模拟值。其硬件脚位定义如下. adc_channel为0~5
+| 脚位定义	| ADC Channel
+| --| --
+| P0 (P0.4)	| ADC Channel 0
+| P1 (P0.5)	| ADC Channel 1
+| | P2 (P0.6)	| ADC Channel 2
+| P3 (P0.7)	| ADC Channel 3 (外部仿真信号输入)
+| P4 (P4.2)	| ADC Channel 4 (光线传感器)
+| P10 (P4.3)	| ADC Channel 5 (麦克风) 
+
+> ADC.init(adc_channel)
+
+启用 ADC 块
+
+> ADC.deinit()
+
+禁用 ADC 块
+
+> ADC.channel(adc_channel)—可以用以切换ADC输入通道
+
+创建模拟引脚。如果只提供通道 ID, 则将选择正确的引脚。或者, 只能传递引脚, 并选择正确的通道。
+
+    # 所有这些都是等效的, 并在 P0.5 上启用 ADC 通道1
+    apin = adc.channel(1)
+    apin = adc.channel(pin='P5')
+    apin = adc.channel(id=1, pin='P5')
+
+> ADC.read()
+
+读取ADC采样数据, 采样频率为1KHz
+###4.8.1 麦克风
+ADC 通道可以连接到 MCU 的内部点或 GPIO 引脚, 我们首先来介绍ADC通道连接到板载麦克风，可以用其感知周边环境的声音变化。
+
+例：显示声音值
+
+    from machine import ADC
+    from machine import LED
+    import utime
+    sound = ADC(5)
+    led = LED(2)
+    
+    try:
+    while True:
+    	if sound.read() > 3 :  #麦克风输入音量大小超过3时, LED会亮绿灯
+    		led.on()
+    		utime.sleep_ms(750) #维持LED亮750毫秒
+    	else: 
+    		led.off()
+    	utime.sleep_ms(1)
+    finally: 
+      sound.deinit()
+      led.off()	
+
+使用前，导入EasyPython的ADC模块
+
+    from machine import ADC
+
+我们使用 sound.read() 获取麦克风的数据。
+
+学会了如何收集周边环境的声音数据，我们可以结合其他功能做更多有趣的场景。
+###4.8.2 光线传感器
+易控板板载光线传感器，可以用其感知周边环境的光线变化。光线传感器使用ADC通道”4”做为输入
+
+例：光控灯:
+
+    from machine import ADC
+    from machine import LED
+    import utime
+    light = ADC(4)
+    led = LED(2)
+    
+    try:
+    while True:
+    	if light.read() < 60 :  #当光线小于60, 输入音量大小超过3时, LED会亮绿灯
+    		led.on()
+    	else: 
+    		led.off()
+    	utime.sleep_ms(100)
+    finally: 
+      light.deinit()
+      led.off()	
+
+使用 light.read() 对象来获取光线传感器数据:
+
+学会了如何收集周边环境的光线数据，我们可以结合其他功能做更多有趣的场景。
+##4.10 Pin—引脚控制
+引脚对象用于控制 I/O 引脚 (也称为 GPIO-通用输入/输出)。引脚对象通常与可以驱动输出电压和读取输入电压的物理引脚相关联。引脚类具有设置引脚模式 (IN、OUT 等) 的方法, 以及获取和设置数字逻辑级别的方法。
+
+引脚对象是使用明确指定特定 I/O 引脚的标识符构造的。标识符的允许形式和标识符映射到的物理引脚是特定于埠的。标识符的可能性是一个整数、一个字符串或一个具有端口和引脚编号的元组。
+
+使用模式:
+
+    from machine import PIN
+    p=PIN(‘P12’)			#创建I/O P12
+    p.init(mode=PIN.OUT, value=0)	#在引脚P12设置为一个输出, 将值设置为 "低" 
+    p.value(1)				#然后设置为 "高"
+   
+
+    
+
+>  PIN(id, mode=PIN.IN, pull= PIN.INACTIVE,  value=0, drive=
+> PIN.NORMAL_POWER)
+
+创建引脚物件给定id关联的引脚外设 (GPIO 引脚)。如果在建构函式中给出了其他参数, 则它们将用于初始化引脚。这些参数是
+
+i.id: 是必需的, 脚位定义为‘P0’~’P32’, P17和P18为保留
+ii.mode: 指定引脚模式, 它可以是: 输出引脚PIN.OUT, 输入引脚PIN.IN
+iii.pull : 指定引脚是否连接了 (弱) 拉电阻, 并且可以是
+ 
+
+ - 上拉电阻启用PIN.PULL_UP, 
+ - 向下拉电阻启用PIN.PULL_DOWN, 
+ - 无向上或向下电阻PIN.INACTIVE
+ 
+iv.value: 仅对 PIN.OUT和PIN.OPEN_DRAIN 模式有效, 并指定初始输出引脚值 0或1 (如果给定), 否则引脚外设的状态保持不变.
+v.drive: 指定引脚的输出功率, 可以是以下各项: PIN.LOW_POWER, PIN.NORMAL_POWER, PIN.MED_POWER, PIN.HIGH_POWER。实际的当前驱动能力取决于埠。并非所有埠都实现此参数.
+
+> PIN.init(mode, pull, value, drive)
+
+使用给定的参数重新初始化引脚。将只设置指定的那些参数。引脚外围状态的其余部分将保持不变。返回无. 
+i.mode: 指定引脚模式, 它可以是: 输出引脚PIN.OUT, 输入引脚PIN.IN
+ii.pull : 指定引脚是否连接了 (弱) 拉电阻, 并且可以是
+
+ - 上拉电阻启用PIN.PULL_UP, 
+ - 向下拉电阻启用PIN.PULL_DOWN, 
+ - 无向上或向下电阻PIN.INACTIVE
+ 
+iii.value: 仅对 PIN.OUT和PIN.OPEN_DRAIN 模式有效, 并指定初始输出引脚值 0或1 (如果给定), 否则引脚外设的状态保持不变.
+iv.drive: 指定引脚的输出功率, 可以是以下各项: PIN.LOW_POWER, PIN.NORMAL_POWER, PIN.MED_POWER, PIN.HIGH_POWER。实际的当前驱动能力取决于埠。并非所有埠都实现此参数.
+
+> PIN.deinit()
+
+禁用 PIN 块 
+
+> PIN.value([x])
+
+此方法允许设置和获取引脚的值, 具体取决于是否提供了参数x.
+
+如果省略该参数, 则该方法获取引脚的数字逻辑电平, 分别返回与低电压和高压信号相对应的0或1。此方法的行为取决于引脚的模式: 
+
+i.PIN.IN: 该方法返回引脚上当前存在的实际输入值.
+ii.PIN.OUT : 方法的行为和传回值是未定义的
+
+如果提供了参数, 则此方法设置引脚的数字逻辑级别。参数x可以是转换为布尔值的任何内容。如果它转换为true, 则引脚设置为 "1" 状态, 否则它将设置为 "0"。此方法的行为取决于引脚的模式:
+
+i.PIN.IN: 该值存储在引脚的输出缓冲区中。引脚状态不会改变, 它保持在高阻抗状态。一旦将存储的值更改为“PIN.OUT"模式, 该值将在引脚上变为活动值.
+ii.PIN.OUT : 输出缓冲区立即设置为给定的值.
+
+设置值时, 此方法返回"无"
+
+> PIN.mode([mode])
+
+获取或设置引脚模式。
+
+> PIN.pull([pull])
+
+获取或设置引脚拉状态, 可以是PIN.PULL_UP, PIN.PULL_DOWN, PIN.INACTIVE
+
+> PIN.drive([drive])
+
+获取或设置引脚驱动强度, 可以是PIN.LOW_POWER, 
+
+> PIN.NORMAL_POWER, PIN.MED_POWER, PIN.HIGH_POWER
+> PIN.irq(handler=None, trigger=(PIN.IRQ_FALLING |
+> PIN.IRQ_RISING|Pin.IRQ_LOW_LEVEL|Pin.BOTH |Pin.IRQ_HIGH_LEVEL))
+
+配置要在引脚的触发源处于活动状态时调用的中断处理程序。如果引脚模式为PIN.IN, 则触发源是引脚上的外部值。如果引脚模式为PIN.OUT, 则触发源是引脚的输出缓冲区。这些参数是:
+i.handler: 是一个可选的函数, 当中断触发时调用。handler必须只采用一个参数.
+ii.trigger: 配置可以生成中断的事件。可能的值为
+
+ - PIN.IRQ_FALLING, 在下降缘产生中断
+ - PIN.IRQ_RISING, 在上升缘产生中断
+ - PIN.IRQ_BOTH, 在上升或下降缘产生中断
+ - PIN.IRQ_LOW_LEVEL, 在低电平中断
+ - PIN.IRQ_HIGH_LEVEL, 在高电平中断
+
+这些值可以或 ' 组合在一起, 以便在多个事件上触发
+
+##4.11 Timer定时器
+EasyPy有8个定时器，每个定时器由一个以用户定义的频率运行的独立计数器组成。它们可以设置为以特定间隔运行功能。8个定时器编号为0到7，但Timer 0保留供RGB LED内部使用。尽可能避免使用这些定时器。
+
+让我们创建一个定时器对象：
+
+    >>> tim = Timer(2,mode=Timer.PERIODIC) 
+
+定时器的模式共有三种分别为ONE_SHOT, PERIODIC, 和PWM. 现在让我们看看我们刚刚创建的内容：
+
+    >>> tim
+    Timer(2, mode=Timer.PERIODIC)
+
+> Timer(id, mode)
+
+iii.id: 1~7, 0 is for RGB LED use
+iv.mode = 
+Timer.ONE_SHOT—定时器运行一次, 直到设置的时间周期过期
+Timer.PERIODIC—以设置的频率定期运行
+Timer.PWM—在引脚上输出 PWM 信号
+
+EasyPy告诉我们tim附加到2号定时器，但它尚未初始化。所以让我们初始化它以10 Hz（每秒10次）触发：
+
+    >>> tim.init(mode=Timer.PERIODIC)
+    >>> tim.channel(Timer.A, freq=10)
+    Timer.channel(Timer.0, freq=10)
+
+> Timer.deinit( )
+
+初始化定时器。它的模式有
+
+Timer.ONE_SHOT—定时器运行一次, 直到设置的时间周期过期
+Timer.PERIODIC—以设置的频率定期运行
+Timer.PWM—在引脚上输出 PWM 信号
+
+现在它已初始化，我们可以了解有关定时器的一些信息, 该信息意味着该定时器设置从0开始计数到设定频率数字使定时器触发为10 Hz, 此时它会触发中断。
+
+> Timer.channel (channel, freq, period, duty_cycle=0)
+
+ 
+如果只传递了通道标识符, 则返回以前初始化的信道对象 (如果没有以前的通道, 则为”无")。否则,将初始化并返回timechannel对象。操作模式是配置为用于创建信道的 timer 对象的模式.
+
+v.channel: Timer.A, Timer.B, Timer.C, Timer.D
+时间模式下的channel设定
+Timer.TIMER_MATCHER_0 : Set timer channel 0.
+Timer.TIMER_MATCHER_1 : Set timer channel 1.
+Timer.TIMER_MATCHER_2 : Set timer channel 2.
+Timer.TIMER_MATCHER_3 : Set timer channel 
+
+PWM模式下的channel设定
+Timer.TIMER_PWM_0 : Set PWM channel 0.
+Timer.TIMER_PWM_1 : Set PWM channel 1.
+Timer.TIMER_PWM_2 : Set PWM channel 2. 
+
+vi.freq: Hz 为单位设置频率.
+vii.period: 以毫秒(milliseconds)为单位设置周期.
+**Note: 需要给频率或周期其中一个数值, 但不能同时都给.**
+viii.duty_cycle: 适用于PWM模式。它是一个百分比 (0.0-100.00)。由于EasyPy不支持浮点数, 因此必须在0-10000 范围内指定占空比, 其中10000表示 100.00, 5050 表示 50.50, 依此类推.
+
+    当信道处于 PWM 模式时, 将自动分配相应的PWM引脚, 因此无需通过pin类分配引脚的替代功能。支持 PWM 功能的引脚如下所示:
+    
+
+ | Timer | 	PWM Channel  | 	PWM pin |  	Timer | 	PWM Channel  | 	PWM pin 
+ | ---   | ---            | --       | ---      | --               | -- 
+| 0	| 0		|  | 4	| 0	|  | 
+
+	1			1	
+	2			2	
+1	0	P12	5	0	
+	1	P10		1	
+	2	P4		2	
+2	0	P9	6	0	P3
+	1	P8		1	P2
+	2	P15		2	P1
+3	0	P14	7	0	P0
+	1	P13		1	P7
+	2	P16		2	P6
+###4.11.1 定时器中断回调 (Callback)
+我们接下来要做的是为定时器注册一个回调函数，以便在触发时执行（有关回调函数的介绍，请参阅开关教程）：
+
+    >>> tim_a.irq(trigger=Timer.TIMEOUT,handler=toggle)
+    
+
+> timerchannel.irq(trigger, handler=None)
+
+此回调函数的行为在很大程度上取决于定时器信道的操作模式:
+
+ - 如果模式是Timer.PERIODIC, 回调函数将使用设置的频率或周期定期执行.
+ - 如果模式为timer.ONE_SHOT, 则在设置的定时器过期时执行一次回调函数.
+ - 如果模式是timer.PWM, 则在达到占空比值时执行回调函数.
+i.trigger: Timer.TIMEOUT ( mode= Timer.PERIODIC或Timer.ONE_SHOT使用), Timer.MATCH (mode=Timer.PWM使用)
+ii.handler: 当在触发时间中断时调用, 将执行一个可选的回调函数
+
+在定时器的运行中, 您可以通过下面的方法来改变来更改频率, 周期, 和占空比：
+
+> timerchannel.freq ([value])
+
+获取或设置定时器信道频率 (以 Hz 为单位)。
+
+> timerchannel.period ([value])
+
+获取或设置定时器信道周期 (以毫秒为单位)。
+
+> timerchannel.duty_cycle([value])
+
+获取或设置 PWM 信号的占空比。它是一个百分比 (0.0-100.00)。由于ePy不支持浮点数, 因此必须在0-10000 范围内指定占空比, 其中10000表示 100.00, 5050 表示 50.50, 依此类推。
+
+> Timer.deinit( )
+
+停止定时器, 并禁用定时器外设。
+###4.11.2 与时间相关的功能
+
+utime模块提供了获取目前时间和日期、测量时间间隔和延迟的功能.
+
+ 
+维护实际日历日期时间: 这需要系统时钟 (RTC)。在具有底层操作系统 (包括某些 RTOS) 的系统上, RTC 可能是隐式的。设置和维护实际日历时间是OS/RTOS的责任, 是在 EasyPython 之外完成的, 它只是使用操作系统 API 来查询日期时间。然而在裸机的系统时间取决于machine.RTC( )对象可以使用计算机设置当前日历时间machine.RTC().datetime(tuple)函数, 并通过以下方式进行维护:
+
+ - 备用电池 (可能是特定主板的附加可选组件)。
+ - 使用网络时间协议 (需要由 port/使用者设置)。
+ - 由使用者在每次上电时手动设置 (许多主板在硬重置时仍保持RTC时间, 但在这种情况下, 有些主板可能需要再次设置RTC时间)。
+ 
+如果实际日历时间未使用 system/EasyPython RTC 维护, 则下面需要引用当前绝对时间的函数可能不会像预期的那样。
+
+> Utime.localtime([secs] )
+
+将Epoch以秒为单位表示的时间转换为8元组, 其中包含: (年、月、月、日、小时、分钟、第二、工作日、日) 如果未提供, 或者没有, 则使用 RTC 的目前时间。
+
+ - 年包括世纪 (例如 2014)。
+ - 月份为1-12
+ - m 日是1-31
+ - 小时是0-23
+ - 分钟是0-59
+ - 秒是0-59
+ - 周一至周日的工作日为0-6
+ - 年日是1-366
+
+> Utime.mktime( )
+
+这是localtime时间的反函数。它的参数是一个完整的8元组, 它表示一个时间, 根据本地时间。它返回一个整数, 它是自2000年1月1日以来的秒数。
+
+> utime.sleep(seconds)
+
+在给定的秒数内睡眠。某些主板可能接受以秒作为浮点数, 以在数秒数的时间内休眠。请注意, 其他主板可能不接受浮点参数, 因为与它们兼容, 请使用sleep_ms()和sleep_us()函数。
+
+> utime.sleep_ms(ms)
+
+给定毫秒数的延迟, 应为正数或0。
+
+> utime.sleep_us(us)
+
+给定的微秒数的延迟, 应为正或0。
+##4.12 RTC系统时钟
+RTC是独立的时钟, 保持纪录日期和时间。
+示例用法:
+
+    from machine import RTC
+    rtc = RTC(datetime=(2019, 4, 25, 9, 0, 0))  #创建RTC对象, 设定时间为2019/4/25 9:00:00
+    print(rtc.now())
+
+> RTC(datetime)
+
+创建RTC物件。获取或设置RTC的日期和时间. 如果没有参数, 此方法将返回具有当前日期和时间的8元组。对于1个参数 (8 元组), 它设置日期和时间.
+
+8元组具有以下格式:
+
+(年、月、日、小时、分钟、秒)
+
+> RTC.now()
+
+获取当前日期时间。
+
+> RTC.init(datetime)
+
+初始化RTC。日期时间是表单的一个元组: (年、月、日 [、小时 [、分钟 [、秒 ]]])。
+
+> RTC.deinit()
+
+将RTC重置为 2015年1月1日, 并重新开始运行。
+
+> RTC.alarm(time, repeat=False)
+
+设置RTC警报。时间可以是将警报程序设计为目前时间 +time _ in _ second的秒值, 也可以是一个日期时间。如果所经过的时间以毫秒为单位, 则可以将重复设置为true, 以使警报定期发生。
+
+i.time: 以秒为单位
+repeat: 可以重复设置True or False
+ii.time: 以日期时间为单位(year, month, day[, hour[, minute[, second]]])
+repeat: 不可以重复设置False
+
+> RTC. alarm_cancel()
+
+取消正在运行的警报。
+RTC.irq(trigger, handler=None)
+创建由系统时钟警报触发的中断对象。
+
+ - trigger必须是RTC.ALARM0
+ - handler是触发中断时要调用的回调函数.
+##4.13 加速度计
+在这里，您将学习如何使用LED向左和向右倾斜等状态读取加速度计和信号。
+###4.13.1 使用加速度计
+EasyPy有一个加速度计（微小弹簧上的微小质量），可用于检测电路板的角度和运动。对于x，y，z方向中的每一个，存在不同的传感器。要获取加速度计的值，请创建Accel（）对象，然后调用x（）方法。
+
+    >>> accel = Accel()
+    >>> accel.x()
+
+    7
+
+这将返回一个有符号整数，其值介于-30和30之间。请注意，测量结果非常嘈杂，这意味着即使您保持电路板完全静止，您测量的数量也会有一些变化。因此，您不应使用x（）方法的确切值，而是查看它是否在某个范围内。
+
+我们将首先使用加速度计打开灯，如果灯不平。
+
+    from machine import Accel
+    from machine import LED
+    import utime
+    
+    accel = Accel()
+    light = LED(3)
+    
+    while True:
+        x = accel.x()			;X加速度
+        if abs(x) > 10
+            light.on()
+        else:
+            light.off()
+    
+    	utime.sleep_ms(100)
+
+我们创建Accel和LED对象，然后获取加速度计的x方向的值。如果x的大小大于某个值，则LED会亮起，否则会关闭。循环有一个小的，utime.sleep_ms() 否则当x的值接近时，LED会恼人地闪烁 。尝试在ePy上运行此操作并左右倾斜电路板以使LED打开和关闭。
+
+**练习：更改上面的脚本，使得倾斜EasyPy的蓝色LED越亮。提示：您需要重新调整值，强度从0到255。**
+###4.13.2 制作反应层面
+上面的示例仅对x方向上的角度敏感，但如果我们使用该y()值和更多LED，我们可以将EasyPy转换为反应级别。
+
+    from machine import Accel
+    from machine import LED
+    import utime
+    
+    xlights = (LED(2), LED(3))
+    ylights = (LED(1), LED(4))
+    
+    accel = Accel()
+    
+    while True:
+        x = accel.x()
+        if x > 10:
+            xlights[0].on()
+            xlights[1].off()
+        elif x < -10:
+            xlights[1].on()
+            xlights[0].off()
+        else:
+            xlights[0].off()
+            xlights[1].off()
+    
+        y = accel.y()
+        if y > 10:
+            ylights[0].on()
+            ylights[1].off()
+        elif y < -10:
+            ylights[1].on()
+            ylights[0].off()
+        else:
+            ylights[0].off()
+            ylights[1].off()
+    
+        utime.sleep_ms(100)
+
+我们首先为x和y方向创建一个LED对像元组。元组是python中的不可变对象，这意味着它们一旦被创建就无法修改。然后我们像以前一样继续操作，但为正负x值打开不同的LED。然后我们对y方向做同样的事情。这不是特别复杂，但它完成了这项工作。在你的EasyPy上运行它，你应该看到不同的LED打开，这取决于你如何倾斜板。
+
+##4.14 串口
+###4.14.1 串口基本概念
+####4.14.1.1. 串口原理
+串口通信的英文缩写是UART(Universal Asynchronous Receiver Transmitter) 全称是通用异步收发器。
+
+听起来很高深的概念，其实就如下图，两个设备，一根线串起来，发送方在线的一头将数据转换为二进制序列，用高低电平按照顺序依次发送01信号，接收方在线的另一头读取这根信号线上的高低电平信号，对应转化为二进制的01序列。
+
+异步收发指的就是全双工传输，即发送数据的同时也能够接收数据，两者同步进行，就如同我们的电话一样，我们说话的同时也可以听到对方的声音。
+
+每当我们想要在PC和MCU之间或两个MCU之间进行通信时，最简单的方法就是使用UART。在两个UART之间传输数据只需要两根线。数据从发送UART的Tx引脚流向接收UART的Rx引脚。
+
+![](https://raw.githubusercontent.com/Honor-D/EasyPython/master/img/wps31267.png) 
+
+串口通信原理示意
+####4.14.1.2. 波特率
+波特率(bandrate)是指，每秒钟我们的串口通信所传输的bit个数，通俗的讲就是在一秒内能够发送多少个1和0的二进制数。比如，波特率是9600，就意味着1S中可以发送9600个0和1组成的二进制序列。
+
+####4.14.1.3. 发送端 TX 与 接收端 RX
+UART通信基本上使用2个引脚进行数据传输。Tx-用于发送数据的发送数据的引脚，Rx-用于获取数据的接收数据的引脚。两个串口进行通信的话， 最少需要三根线相连。
+
+![](https://raw.githubusercontent.com/Honor-D/EasyPython/master/img/wps31580.png) 
+
+RX 代表信息接收端，TX 代表信息发送端, GND代表电源地线
+
+注意, 如果连接的模块并没有自主供电，还须连接VCC！
+###4.14.2 串口操作
+在ePy board上支持两组UART, 其硬件脚位定义如下, 在EasyPython中UART0_TxD, UART0_RxD已经被EasyPython中的REPL(Real Evaluate Print Loop)接口所使用，所以不要用EasyPythonn的指令去控制UART0。
+
+| 脚位定义	| UART
+| -- |-- 
+| P6 (P0.2)	| UART0_TxD
+| P7 (P0.3)	| UART0_RxD
+| P8 (P4.0)	| UART1_TxD
+| P9 (P4.1)	| UART1_RxD
+####4.14.2.1 构建UART
+UART 对象可以使用以下方法创建和初始化
+
+    from machine import UART                # 导入UART machine
+    
+    uart=UART(1,baudrate=9600)  		# 构建UART1对象，设置波特率为9600
+
+我们在此处构建UART1时，波特设为9600，后面才能通讯成功。请根据自己需要的连接串口的波特率自行设置。
+
+> UART(id, baudrate)
+
+i.id: 0 或 1, 分别指定UART0 或 UART1
+ii.baudarte = 
+波特率可以为9600, 14400, 19200, 38400, 57600, 115200, 230400, 460800 
+
+一般只需设置上述参数即可，其他参数会保持默认参数。
+
+UART 对象的作用类似于stream 对象, 读取和写入是使用标准流方法完成的, 下面将详细说明:
+
+uart.read(10)       # 读取10个字符, 返回一个字节对象
+uart.read()         # 读取所有可用字符
+uart.readline()     # 读一行
+uart.readinto(buf)  # 读取并存储到给定的缓冲区
+uart.write('abc')   # 写3个字符
+####4.14.2.2 串口发送
+你可以使用串口助手来连接电脑。这样就可以实现板和电脑的通讯。您可以往串口发送字节数据:
+
+    >>> from machine import UART
+    >>> ser=UART(1,115200)
+    >>> ser.write('abc')
+
+这时，用串口助手看下，是否接受到易控板发过来的数据。write(buf) 函数为向串口写入（发送）字节数据，返回数据的长度。
+
+> write(buffer)
+
+将字节的缓冲区写入总线。传回值: 写入的字节数或超时时返回"无" 。
+####4.14.2.3 串口读取
+易控板接收串口数据，并将数据显示至REPL上:
+
+> any( )
+
+返回一个整数, 计算可以读取而不阻塞的字符数。如果没有可用字符, 它将返回 0, 如果有字符, 则返回正数。即使有多个字符可供读取, 该方法也可能返回1。
+
+> read(nbys )
+
+读取字符。如果指定了nbytes, 则最多读取那么多字节, 否则读取尽可能多的数据.
+传回值: 包含读取的字节的字节对象。超时时返回无.。
+
+> readinto(buf [, nbys] )
+
+将字节读入buf。如果指定了nbytes, 则最多读取多个字节。否则, 最多读取len (buf)字节.
+传回值: 读取并存储到buf或超时时返回无.。
+
+> readline( )
+
+读取行, 以换行字符结尾。
+传回值: 读取的行或超时时返回"无".。
+
+        from machine import UART                               # 导入UART machine
+        
+        uart=UART(1,baudrate=9600)    # 实例UART，设置波特率9600
+        
+        while True:
+            if(uart.any()):                     # 当串口有可读数据时
+                data = uart.readline()          # 从串口读取一行数据
+                print("received:",data)         #
+    
+     打印接收到的数据
+
+这时你可以通过串口助手向串口发送数据，当易控板接收到串口数据后，打印并显示至REPL。在while循环中,轮询使用 uart.any() 判断串口中是否有可读数据，当有数据时，用 uart.readline() 读取一行数据。除了 UART.readline() 读取数据，还可以使用 UART.read(length) 从串口读取指定长度的数据。
+###4.14.3 拓展
+学会了如何使用串口后，你就可以实现易控板与其他MCU(Arduino)、电脑/手机、电子模块间的通讯。应用更为广泛，您可发挥你想象，如何用好串口，做出更有趣的东西！
+##4.15 I2C
+I²C（Inter-Integrated Circuit）字面上的意思是集成电路之间，它其实是I²C Bus简称。I2C总线类型是由飞利浦半导体公司在八十年代初设计出来的一种简单、双向、二线制、同步串行总线，主要是用来连接整体电路(ICS)
+
+I2C协议是多个设备仅使用两条线（时钟和数据线）相互通信的一种方式。任何设备都可以是控制I2C时钟和数据线以与其他设备通信的主设备。 每个I2C器件都分配有一个唯一的地址，用于在读写操作期间识别它。当设备看到其在I2C总线上发送的地址时，它会响应请求，当它看到不同的地址时，它会忽略它。 使用唯一地址，许多设备可以共享相同的I2C总线而不会产生干扰。
+
+
+----------
+
+
+在使用易控板，您可以使用 I2C类别函数与I2C总线上的设备进行交互。在大多数情况下，您将充当I2C“主设备”，可以与其他I2C设备读写数据。 您还可以充当I2C“从属”或外设，它们分配了一个地址，可以监听和响应来自其他I2C设备的请求。ePy board易控板可以支持2个I2C接口界面来与从机设备通信, 其脚位定义如下。
+
+| 脚位定义	| I2C 1	| I2C 2
+| --| --| --
+| SCL	| P19 (P4.8)	| P27 (P0.0)
+| SDA	| P20 (P4.9)	| P28 (P0.1)
+###4.15.1 Master主设备
+大部分I2C通讯类模块，操作方法类似。ePy board易控板充当I2C主设备，模块作为从机设备，响应主机请求。I2C对象可以在创建时初始化, 也可以在以后初始化。示例用法: 
+
+    from machine import I2C
+    
+    i2c = I2C(1,freq=400000)      	# 创建频率为400khz 的 I2C 外设, 选择要使用的外设 I2C 1
+    
+    i2c.read(1, 0x40, buf, 8, 1) 	# 读取8个字节从从设备地址 40
+    i2c.write(1, 0x40, buf1, 8, 1)	# 写8个字节到从设备地址 40
+
+> I2C(id, speed)
+
+使用以下参数构造并返回新的 I2C 物件:
+
+ - id标识特定的 I2C 外设。1为I2C1; 2为I2C2.
+
+
+ - speed应该是一个整数, 它设置 SCL 的最大频率. 
+  - o100000 : 100 KHz
+  - o400000 : 400 KHz
+  - o1000000: 1 MHz 
+  
+
+> I2C.deinit( )
+
+关闭 I2C 总线.
+
+> I2C.read(i2c_id, slave_addr, data_buffer_addr, buffer_len, stop)
+
+从addr指定的从属中读入buffer。读取的字节数将是buffer的长度。如果停止为真, 则会在传输结束时生成 stop 条件. 该方法返回"无".
+
+ - i2c_id: id标识特定的 I2C 外设。1为I2C1; 2为I2C2.
+ -  slave_addr: 从设备地址ID.
+ -  data_buffer_addr: 字节的buffer地址. 
+ -  length: 数据长度. 
+ - stop condition: 设定停止条件为自动.
+
+> I2C.write(i2c_id, slave_addr, data_buffer_addr,
+> 
+>  buffer_len, stop)
+
+将字节从buffer写入addr指定的从设备. 如果在从 buffer 写入字节后收到 NACK, 则不会发送剩余的字节。如果停止为真, 则在传输结束时生成 stop 条件, 即使收到了 nack 也是如此。该函数返回接收到的 Ack 数.
+ -  i2c_id: id标识特定的 I2C 外设。1为I2C1; 2为I2C2.
+ -  slave_addr: 从设备地址ID.
+ -  data_buffer_addr: 字节的buffer地址. 
+ -  length: 数据长度. 
+ -  stop condition: 设定停止条件为自动.
+##4.16 SPI
+SPI 是一种由主机驱动的同步串行协议。在物理级别, 总线由3条线路组成: SCK、MOSI、MISO。多个设备可以共享同一总线。每个设备都应该有一个单独的, 第四个信号, SS (从选择), 以选择与之通信的总线上的特定设备。SS 信号的管理应在用户代码中进行. 其框架图如下
+
+![](https://raw.githubusercontent.com/Honor-D/EasyPython/master/img/wps35850.png) 
+
+同步串行端口 (SSP) 控制器可以在 SPI 和4线 SSI 总线上运行。它与总线上的多个主设备和从设备交互。在给定的数据传输过程中, 只有一个主机和一个从站可以在总线上进行通信。数据传输原则上是全双工, 与4到16位数据的框架流动从主设备到从机和从机到主设备。实际上, 这些数据流中往往只有一个带有有意义的数据。
+
+SSP 的特点包括:
+
+ - 兼容摩托罗拉 SPI 和4线 TI SSI 总线。
+ -  同步串行通信。
+ -  支持主操作或从操作。
+ -  8帧 FIFO, 用于发射机和接收机。
+ -  4位到16位帧。
+ -  主模式下最大 SPI 速度为 40 MHz, 从模式下最大 Spi 速度为 40 MHz
+ -  数据传输格式来自由寄存器控制的 MSB 或 LSB
+ -  数据采集位置选择的起始阶段为一相或二相控制寄存器
+ 
+大部分SPI通讯类模块，操作方法类似。ePy board易控板可以支持2个SPI接口界面来与从机设备通信, 其脚位定义如下。
+
+| 脚位定义	| SPI 0	| SPI 1
+| --| --| --
+| CS	| P23 (P0.14)	| P16 (P3.12)
+| CLK	| P24 (P0.15)	| P13 (P3.13)
+| MISO	| P25 (P1.0)	| P14 (P3.14)
+| MOSI	| P26 (P1.1)	| P15 (P3.15)
+SPI对象可以在创建时初始化, 也可以在以后初始化。示例用法: 
+
+    from machine import SPI
+    
+    spi=SPI(0,mode=SPI.MASTER, baudrate=20000000)  
+    #创建频率为20MHz的SPI外设, 选择要使用的外设 SPI 0
+    
+    spi.read(5) 				# 读取5个字节
+    spi.write(‘hello’)				# 写5个字节
+
+> SPI.init(ch, mode=SPI.MASTER, baudrate=1000000, polarity=0, phase=0)
+
+在给定总线上构造一个 SPI 对象, ch。ch 的值取决于特定的端口及其硬件。值0、1等通常用于选择硬件 SPI 块 #0、#1 等, 使用以下参数构造并返回新的 SPI 对象:
+
+ - ch标识特定的 SPI 外设。0为SPI0; 1为SPI1.
+ - mode =SPI.MASTER(主), SPI.SLAVE (从)
+ - baudrate =40000000, 20000000, 10000000, 5000000, 2500000, 1250000. 它应该是一个整数, 它设置 SCLK 的时钟速率. 一般建议使用20MHz
+ - polarity = 0 (SCK idles at Low level), 1 (SCK idles at High level). 可以是0或1, 并且是空闲时钟线所处的级别.
+ - phase = 0 (Sample at 1st edge), 1 (Sample at 2nd edge). 可以是0或 1, 分别用于采样第一或第二时钟边缘上的资料.
+  - opolarity=0, phase=0 : MODE 0
+  - opolarity=0, phase=1 : MODE 1
+  - opolarity=1, phase=0 : MODE 2
+  - opolarity=1, phase=1 : MODE 3
+
+![](https://raw.githubusercontent.com/Honor-D/EasyPython/master/img/wps37210.png) 
+
+> SPI.deinit()
+
+关闭 SPI 总线.
+
+> SPI.write(buf)
+
+写入buffer中包含的字节但不可超过4096字节。返回无.
+
+> SPI.read(nbytes)
+
+读取nbytes指定的字节数但不可超过4096字节。返回包含已读取数据的字节对象. 
+> SPI.readinto(buf)
+
+读取buffer指定的缓冲区但不可超过4096字节。返回无. 
+
+> SPI.write_readinto(write_buf, read_buf)
+
+在读取到read_ buf时, 写入来自write _ buf的字节但buffer不可超过4096字节。缓冲区可以是相同的, 也可以是不同的, 但两个缓冲区的长度必须相同。返回无.
+
+
+
+
+
+
+
+
+
+
+
 
 ##4. 打开LED和基本的Python概念
 
